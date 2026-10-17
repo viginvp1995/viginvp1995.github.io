@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;500&amp;display=swap');
+      .display { font-family: 'Sora', 'Segoe UI', system-ui, sans-serif; }
+      .body    { font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; }
+      .mono    { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+    </style>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1733"/>
+      <stop offset="1" stop-color="#070d1a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#4c8dff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#4c8dff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="leftFade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#070d1a" stop-opacity="0.85"/>
+      <stop offset="0.55" stop-color="#070d1a" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="avatarClip">
+      <circle cx="930" cy="235" r="150"/>
+    </clipPath>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1200" height="630" fill="url(#sky)"/>
+
+  <!-- stars (deterministic) -->
+  <g fill="#c8d6f5">
+    <circle cx="60"   cy="80"  r="1.4" opacity="0.75"/>
+    <circle cx="140"  cy="40"  r="0.9" opacity="0.5"/>
+    <circle cx="220"  cy="110" r="1.1" opacity="0.6"/>
+    <circle cx="330"  cy="60"  r="0.7" opacity="0.5"/>
+    <circle cx="420"  cy="100" r="1.3" opacity="0.7"/>
+    <circle cx="520"  cy="40"  r="0.8" opacity="0.5"/>
+    <circle cx="640"  cy="90"  r="1.0" opacity="0.6"/>
+    <circle cx="760"  cy="50"  r="1.5" opacity="0.8"/>
+    <circle cx="880"  cy="120" r="0.9" opacity="0.5"/>
+    <circle cx="980"  cy="70"  r="1.1" opacity="0.65"/>
+    <circle cx="1080" cy="40"  r="0.8" opacity="0.5"/>
+    <circle cx="1140" cy="100" r="1.2" opacity="0.7"/>
+    <circle cx="90"   cy="200" r="0.8" opacity="0.45"/>
+    <circle cx="260"  cy="240" r="1.0" opacity="0.55"/>
+    <circle cx="380"  cy="200" r="0.7" opacity="0.4"/>
+    <circle cx="560"  cy="230" r="1.1" opacity="0.6"/>
+    <circle cx="720"  cy="190" r="0.8" opacity="0.5"/>
+    <circle cx="840"  cy="240" r="1.0" opacity="0.55"/>
+    <circle cx="1020" cy="200" r="0.9" opacity="0.5"/>
+  </g>
+
+  <!-- glow halo + profile portrait (circular) -->
+  <circle cx="930" cy="235" r="260" fill="url(#glow)"/>
+  <image href="profile.jpg" x="780" y="85" width="300" height="300" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip)"/>
+  <circle cx="930" cy="235" r="150" fill="none" stroke="#4c8dff" stroke-width="4" stroke-opacity="0.9"/>
+  <circle cx="930" cy="235" r="156" fill="none" stroke="#4c8dff" stroke-width="1" stroke-opacity="0.35"/>
+
+  <!-- mountain ridges -->
+  <path d="M0 440 L160 350 L260 420 L410 260 L520 370 L640 290 L760 380 L900 270 L1050 390 L1200 320 V630 H0Z" fill="#1a2a4f"/>
+  <path d="M0 530 L130 460 L300 525 L470 400 L600 490 L720 440 L870 530 L980 470 L1200 510 V630 H0Z" fill="#12203f"/>
+  <path d="M420 630 L670 480 L740 460 L800 475 L850 450 L1200 600 V630Z" fill="#0a1428"/>
+  <path d="M0 630 L0 590 L190 555 L340 620 L430 630Z" fill="#0a1428"/>
+
+  <!-- climber on summit (same as hero) -->
+  <g fill="#e6ecf8" transform="translate(800 466)">
+    <circle cx="0" cy="0" r="9"/>
+    <path d="M-12 12 Q0 6 12 12 L15 48 L8 48 L6 80 L-1 80 L-2 54 L-4 80 L-11 80 L-10 48 L-15 48Z"/>
+    <path d="M-14 14 L-26 22 L-24 50 L-16 48Z"/>
+  </g>
+
+  <!-- left-side readability fade -->
+  <rect width="1200" height="630" fill="url(#leftFade)"/>
+
+  <!-- text block -->
+  <g>
+    <text class="mono" x="80" y="140" font-size="20" letter-spacing="4" fill="#4c8dff">HELLO, I'M</text>
+    <text class="display" x="80" y="230" font-size="88" font-weight="700" fill="#e6ecf8" letter-spacing="-1.5">Vigin V P</text>
+
+    <!-- role row -->
+    <text class="display" x="80" y="290" font-size="30" font-weight="600" fill="#e6ecf8">
+      <tspan>Full Stack Developer</tspan>
+      <tspan dx="20" fill="#2a3d63">|</tspan>
+      <tspan dx="20" fill="#e6ecf8">Spec-driven · AI-assisted</tspan>
+    </text>
+
+    <text class="body" x="80" y="360" font-size="22" fill="#8b9bb8">
+      <tspan>Scalable web apps · 8+ years · Node.js, NestJS, React</tspan>
+    </text>
+
+    <!-- code-style tagline -->
+    <g transform="translate(80 440)">
+      <rect x="-14" y="-34" width="520" height="68" rx="12" fill="#0f1a30" stroke="#4c8dff" stroke-opacity="0.55"/>
+      <circle cx="4"  cy="-14" r="4" fill="#4c8dff" opacity="0.6"/>
+      <circle cx="20" cy="-14" r="4" fill="#4c8dff" opacity="0.6"/>
+      <circle cx="36" cy="-14" r="4" fill="#4c8dff" opacity="0.6"/>
+      <text class="mono" x="60" y="-6" font-size="22" fill="#c8d6f5">// Build. Learn. Improve. Repeat.</text>
+    </g>
+
+    <!-- bottom row -->
+    <g transform="translate(80 560)" fill="#8b9bb8" class="body" font-size="20">
+      <text x="0" y="0">viginvp1995.github.io</text>
+      <rect x="214" y="-16" width="2" height="22" fill="#2a3d63"/>
+      <text x="232" y="0">Thiruvananthapuram, India</text>
+    </g>
+  </g>
+
+  <!-- accent bar -->
+  <rect x="80" y="590" width="48" height="3" fill="#4c8dff"/>
+</svg>

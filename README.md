@@ -36,4 +36,3 @@ Every push to `main` now rebuilds and deploys the site via `.github/workflows/de
 Add a `public/CNAME` file containing your domain (e.g. `viginvp.dev`), point the domain's
 DNS at GitHub Pages, update `site` in `astro.config.mjs`, and enable **Enforce HTTPS** in
 Settings → Pages.
-# viginvp.github.io
