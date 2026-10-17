@@ -10,9 +10,9 @@ export const profile = {
   intro:
     'I build scalable web applications, solve real-world problems, and use modern engineering practices to ship software that is efficient and reliable.',
   location: 'Thiruvananthapuram, India',
-  email: 'yourname@example.com', // TODO: your real email
-  linkedin: 'https://www.linkedin.com/in/viginvp',
-  github: 'https://github.com/YOUR-GITHUB-USERNAME', // TODO: your GitHub profile
+  email: 'vpvigin@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/vigin-v-p-2403b8115',
+  github: 'https://github.com/viginvp1995',
   resume: 'resume.pdf', // TODO: drop your resume at public/resume.pdf
   tagline: ['Better code.', 'Smarter solutions.', 'A brighter future.'],
 };
