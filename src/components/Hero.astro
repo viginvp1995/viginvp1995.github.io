@@ -1,0 +1,264 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/portfolio';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const loop = ['Build', 'Learn', 'Improve', 'Repeat'];
+
+// Deterministic star field so the build output is stable.
+const stars = Array.from({ length: 46 }, (_, i) => {
+  const x = (i * 137.5) % 800;
+  const y = ((i * 71.3) % 260) + 8;
+  const r = i % 7 === 0 ? 1.6 : i % 3 === 0 ? 1.1 : 0.7;
+  return { x, y, r, o: 0.35 + ((i * 13) % 50) / 100 };
+});
+---
+<section id="home" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hello">Hello, I'm</p>
+      <h1>{profile.name}</h1>
+      <p class="roles">
+        {profile.roles.map((r) => <span>{r}</span>)}
+      </p>
+      <p class="intro">{profile.intro}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#projects">View my projects <Icon name="arrow" /></a>
+        <a class="btn btn-ghost" href={`${base}${profile.resume}`} download>Download resume <Icon name="download" /></a>
+      </div>
+      <ul class="socials">
+        <li><a href={profile.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" label="LinkedIn" /></a></li>
+        <li><a href={profile.github} target="_blank" rel="noopener"><Icon name="github" label="GitHub" /></a></li>
+        <li><a href={`mailto:${profile.email}`}><Icon name="mail" label="Email" /></a></li>
+        <li class="loc"><Icon name="pin" />{profile.location}</li>
+      </ul>
+    </div>
+
+    <div class="scene" aria-hidden="true">
+      <svg viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" class="scene-art">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="var(--sky-top)" />
+            <stop offset="1" stop-color="var(--sky-bottom)" />
+          </linearGradient>
+          <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="var(--accent)" stop-opacity="0.45" />
+            <stop offset="1" stop-color="var(--accent)" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="var(--bg)" />
+            <stop offset="0.35" stop-color="var(--bg)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="560" fill="url(#sky)" />
+        {stars.map((s) => <circle cx={s.x} cy={s.y} r={s.r} fill="var(--moon)" opacity={s.o} />)}
+        <circle cx="560" cy="250" r="230" fill="url(#glow)" />
+        <circle cx="560" cy="250" r="150" fill="var(--moon)" opacity="0.9" />
+        <circle cx="520" cy="215" r="22" fill="var(--sky-top)" opacity="0.12" />
+        <circle cx="600" cy="300" r="34" fill="var(--sky-top)" opacity="0.1" />
+        <path d="M0 330 L120 250 L190 300 L300 180 L380 260 L470 200 L560 280 L660 190 L800 300 V560 H0Z" fill="var(--ridge-1)" />
+        <path d="M0 410 L90 350 L210 400 L330 300 L430 380 L520 330 L640 410 L720 360 L800 400 V560 H0Z" fill="var(--ridge-2)" />
+        <path d="M300 560 L470 380 L520 360 L560 372 L600 350 L800 470 V560Z" fill="var(--ridge-3)" />
+        <path d="M0 560 L0 470 L140 440 L260 500 L330 560Z" fill="var(--ridge-3)" />
+        <!-- climber on the summit -->
+        <g fill="var(--figure)" transform="translate(560 286)">
+          <circle cx="0" cy="0" r="9" />
+          <path d="M-12 12 Q0 6 12 12 L15 48 L8 48 L6 80 L-1 80 L-2 54 L-4 80 L-11 80 L-10 48 L-15 48Z" />
+          <path d="M-14 14 L-26 22 L-24 50 L-16 48Z" />
+        </g>
+        <rect width="800" height="560" fill="url(#fade)" />
+      </svg>
+
+      <div class="code-card">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <pre><code>{loop.map((w, i) => <span class="line" style={`--i:${i}`}>// {w}</span>)}<span class="caret"></span></code></pre>
+      </div>
+
+      <p class="tagline">
+        {profile.tagline.map((t) => <span>{t}</span>)}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: 2rem;
+    min-height: 560px;
+  }
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    padding-block: 4rem;
+  }
+  .hello {
+    color: var(--accent);
+    font-weight: 500;
+    font-size: 1.05rem;
+  }
+  h1 {
+    font-size: clamp(2.8rem, 6.5vw, 4.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0.2rem 0 0.9rem;
+  }
+  .roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0;
+    font-weight: 500;
+    font-size: 1.02rem;
+    max-width: 34rem;
+  }
+  .roles span:not(:last-child)::after {
+    content: '|';
+    color: var(--line-strong);
+    margin-inline: 0.6rem;
+  }
+  .intro {
+    color: var(--muted);
+    max-width: 32rem;
+    margin-top: 1.1rem;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+  }
+  .socials {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+  }
+  .socials a {
+    color: var(--muted);
+    display: block;
+  }
+  .socials a:hover {
+    color: var(--accent);
+  }
+  .loc {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--accent);
+  }
+
+  .scene {
+    position: relative;
+    align-self: stretch;
+    margin-right: calc((100vw - min(var(--wrap), 100vw - 2.5rem)) / -2);
+  }
+  .scene-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .code-card {
+    position: absolute;
+    left: 6%;
+    top: 16%;
+    width: 210px;
+    padding: 0.9rem 1.1rem 1.1rem;
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transform: perspective(700px) rotateY(10deg) rotateX(4deg);
+    box-shadow: 0 0 40px -10px var(--accent);
+  }
+  .dots {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 0.6rem;
+  }
+  .dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+  .code-card pre {
+    margin: 0;
+    font: 500 1.05rem/1.55 var(--font-code);
+    color: var(--code);
+  }
+  .line {
+    display: block;
+    opacity: 0;
+    animation: type-in 0.45s ease-out forwards;
+    animation-delay: calc(0.5s + var(--i) * 0.45s);
+  }
+  .caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    background: var(--code);
+    vertical-align: -0.15em;
+    animation: blink 1s steps(1) infinite 2.4s;
+    opacity: 0;
+  }
+  @keyframes type-in {
+    from { opacity: 0; clip-path: inset(0 100% 0 0); }
+    to { opacity: 1; clip-path: inset(0 0 0 0); }
+  }
+  @keyframes blink {
+    50% { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .line { opacity: 1; }
+  }
+
+  .tagline {
+    position: absolute;
+    right: max(1.25rem, calc((100vw - var(--wrap)) / 2));
+    bottom: 9%;
+    display: flex;
+    flex-direction: column;
+    font: 500 1.15rem/1.45 var(--font-display);
+    text-align: left;
+  }
+  .tagline::after {
+    content: '';
+    width: 36px;
+    height: 2px;
+    background: var(--accent);
+    margin-top: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .hero-copy {
+      padding-bottom: 1.5rem;
+    }
+    .scene {
+      min-height: 340px;
+      margin-inline: -1.25rem;
+    }
+    .tagline {
+      display: none;
+    }
+    .code-card {
+      top: 12%;
+      left: 1.25rem;
+    }
+  }
+</style>
