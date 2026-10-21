@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import ProjectPreview from '../components/ProjectPreview.astro';
-import { profile, about, skills, approaches, projects, experience, caseStudy } from '../data/portfolio';
+import { profile, about, skills, approaches, projects, experience, certifications, caseStudy } from '../data/portfolio';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
@@ -120,10 +120,12 @@ const skillList = skills.map((s) => {
             <h3>{caseStudy.project}</h3>
             <p class="case-summary">{caseStudy.summary}</p>
           </div>
-          <div class="case-stat">
-            <strong>{caseStudy.outcome.stat}</strong>
-            <span>{caseStudy.outcome.label}</span>
-          </div>
+          {caseStudy.outcome && (
+            <div class="case-stat">
+              <strong>{caseStudy.outcome.stat}</strong>
+              <span>{caseStudy.outcome.label}</span>
+            </div>
+          )}
         </div>
         <ol class="case-blocks">
           {caseStudy.blocks.map((b, i) => (
@@ -156,6 +158,20 @@ const skillList = skills.map((s) => {
             </li>
           ))}
         </ol>
+
+        {certifications.length > 0 && (
+          <div class="certs">
+            <h3 class="certs-title"><Icon name="layers" size={18} />Certifications</h3>
+            <ul>
+              {certifications.map((c) => (
+                <li>
+                  <strong>{c.name}</strong>
+                  <span>{c.issuer}{c.note ? ` · ${c.note}` : ''}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <div id="contact">
@@ -484,6 +500,42 @@ const skillList = skills.map((s) => {
     color: var(--muted);
     display: grid;
     gap: 0.3rem;
+  }
+
+  .certs {
+    margin-top: 1.5rem;
+    padding: 1.1rem 1.3rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+  .certs-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font: 600 0.95rem/1 var(--font-display);
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .certs-title :global(svg) {
+    color: var(--accent);
+  }
+  .certs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .certs li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    font-size: 0.9rem;
+  }
+  .certs li span {
+    color: var(--muted);
+    font-size: 0.82rem;
   }
 
   .contact-lead {
